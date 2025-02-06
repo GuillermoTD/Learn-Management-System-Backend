@@ -1,0 +1,5 @@
+# .NET Core
+# Ignore build results
+bin/
+obj/
+logs/
