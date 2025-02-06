@@ -7,7 +7,7 @@ namespace Learn_Managment_System_Backend.Config
     public class DbConnection
     {
 
-        //se declara variable para cliente de mongodb
+        //se declara variable para cliente de mongodbb
         public MongoClient client;
 
         private readonly IMongoDatabase _database;
