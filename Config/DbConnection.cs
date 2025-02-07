@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
@@ -10,18 +11,17 @@ namespace Learn_Managment_System_Backend.Config
 
         //se declara variable para cliente de mongodbb
         public MongoClient client;
-
+        private readonly IConfiguration _Configuration;
         private readonly IMongoDatabase _database;
 
-
-
         //contructor
-        public DbConnection(IConfiguration configuration)
+        public DbConnection(IConfiguration configuration )
         {
             try
             {
+                _Configuration = configuration;
                 //Obteniendo el string de conexion a la base de datos
-                var ConnectionString = configuration.GetConnectionString("MongoDb");
+                var ConnectionString = _Configuration.GetConnectionString("MongoDb");
 
                 //Se crea el cliente desde donde se consultara a la base de datos
                 client = new MongoClient(ConnectionString);
@@ -32,8 +32,12 @@ namespace Learn_Managment_System_Backend.Config
             }
             catch (System.Exception Error)
             {
-                Console.WriteLine("Conexion a base de datos fallida" + "\n " + Error.Message);
+                Console.WriteLine("****Conexion a base de datos fallida****" + "\n " + Error.Message);
             }
+        }
+
+        public DbConnection()
+        {
         }
 
         public void PingDatabase()
@@ -45,13 +49,13 @@ namespace Learn_Managment_System_Backend.Config
                 var result = _database.RunCommand<BsonDocument>(command);
 
                 // Si no lanza excepción, significa que la conexión es exitosa
-                Console.WriteLine("Conexión exitosa a la base de datos.");
+                Console.WriteLine("**********Conexión exitosa a la base de datos.**********");
             }
             catch (System.Exception error)
             {
 
                 // Si ocurre una excepción, la conexión ha fallado
-                Console.WriteLine($"Error al conectar a la base de datos: {error.Message}");
+                Console.WriteLine($"**Error al conectar a la base de datos** :  {error.Message}");
             }
         }
 
