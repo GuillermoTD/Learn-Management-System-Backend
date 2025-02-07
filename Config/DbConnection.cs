@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Core.Configuration;
 using ZstdSharp.Unsafe;
@@ -32,6 +33,25 @@ namespace Learn_Managment_System_Backend.Config
             catch (System.Exception Error)
             {
                 Console.WriteLine("Conexion a base de datos fallida" + "\n " + Error.Message);
+            }
+        }
+
+        public void PingDatabase()
+        {
+            try
+            {
+                // Ejecutamos un comando de ping a la base de datos 'admin'
+                var command = new BsonDocument("ping", 1);
+                var result = _database.RunCommand<BsonDocument>(command);
+
+                // Si no lanza excepción, significa que la conexión es exitosa
+                Console.WriteLine("Conexión exitosa a la base de datos.");
+            }
+            catch (System.Exception error)
+            {
+
+                // Si ocurre una excepción, la conexión ha fallado
+                Console.WriteLine($"Error al conectar a la base de datos: {error.Message}");
             }
         }
 
