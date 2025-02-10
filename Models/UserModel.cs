@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -20,7 +21,7 @@ namespace Learn_Managment_System_Backend.Models
         public required string LastName { get; set; }
 
         [BsonRequired]
-        public required string Age { get; set; }
+        public required int Age { get; set; }
 
         [BsonRequired]
         public required string Email { get; set; }
@@ -36,6 +37,6 @@ namespace Learn_Managment_System_Backend.Models
 
         public string Password { get; set; }
 
-
+       
     }
 }

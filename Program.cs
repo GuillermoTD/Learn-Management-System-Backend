@@ -1,4 +1,5 @@
 using Learn_Managment_System_Backend.Config;
+using Learn_Managment_System_Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddSingleton<DbConnection>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
 
 var app = builder.Build();
 
