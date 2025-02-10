@@ -46,5 +46,9 @@ namespace Learn_Managment_System_Backend.Services
         {
             throw new NotImplementedException();
         }
+
+        public string GenerateJwtToken(){
+            
+        }
     }
 }
