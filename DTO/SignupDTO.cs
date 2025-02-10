@@ -23,7 +23,11 @@ namespace Learn_Managment_System_Backend.DTO
         public required string Password { get; set; }
 
         [Phone(ErrorMessage = "El número de teléfono no es válido.")]
+<<<<<<< HEAD
         public required string PhoneNumber { get; set; }
+=======
+        public string PhoneNumber { get; set; }
+>>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
 
         public required string UserName { get; set; }
     }

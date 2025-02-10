@@ -6,7 +6,10 @@ using Learn_Managment_System_Backend.Config;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+<<<<<<< HEAD
 using System.IdentityModel.Tokens.Jwt;
+=======
+>>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
 
 
 namespace Learn_Managment_System_Backend.Controllers
@@ -29,6 +32,7 @@ namespace Learn_Managment_System_Backend.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+<<<<<<< HEAD
         public async Task<ActionResult> Signup(SignupDTO request)
         {
             try
@@ -79,6 +83,41 @@ namespace Learn_Managment_System_Backend.Controllers
             }
 
 
+=======
+        public async Task<ActionResult<UserModel>> Signup(SignupDTO request)
+        {
+
+            var UserExist = await _UserService.CheckIfUserExists(request);
+
+            if (UserExist == null)
+            {
+                throw new Exception("invalid credentials");
+            }
+
+            bool IsValidPassword = Tools.CheckIfPasswordIsValid(request.Password, UserExist.Password);
+
+            if (IsValidPassword == false)
+            {
+                throw new Exception("Invalid password");
+            }
+
+            UserModel NewUser = new UserModel
+            {
+                Id = ObjectId.GenerateNewId().ToString(), // Generar un nuevo Id de MongoDB
+                Name = request.Name,
+                LastName = request.LastName,
+                Age = request.Age,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Registration_Date = DateTime.UtcNow,
+                User = request.UserName,
+                Password = UserExist.Password, // Ya está hasheada
+                Token = GenerateJwtToken(UserExist)
+            };
+
+
+
+>>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
         }
     }
 }

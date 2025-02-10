@@ -68,8 +68,11 @@ namespace Learn_Managment_System_Backend.Config
             /*Se compara el hash generado con el hash que esta en la base de datos*/
             return CryptographicOperations.FixedTimeEquals(computedHash, storedHash);
         }
+<<<<<<< HEAD
 
       
+=======
+>>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
     }
 
 

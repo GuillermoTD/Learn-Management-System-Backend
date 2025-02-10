@@ -68,6 +68,7 @@ namespace Learn_Managment_System_Backend.Services
 
         }
 
+<<<<<<< HEAD
         public string GenerateToken(string username, string userId)
         {
             try
@@ -142,5 +143,10 @@ namespace Learn_Managment_System_Backend.Services
         }
 
 
+=======
+        public string GenerateJwtToken(){
+            
+        }
+>>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
     }
 }
