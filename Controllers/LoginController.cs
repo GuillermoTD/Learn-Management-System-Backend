@@ -36,10 +36,10 @@ namespace Learn_Managment_System_Backend.Controllers
             try
             {
                 Console.WriteLine("Se valida que existe el usuario");
-                UserDTO User = await UserAuthenticationAsync(request);
+                var User = await UserAuthenticationAsync(request);
 
-                // Console.WriteLine("Se genera el token");
-                // string Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString());
+                Console.WriteLine("Se genera el token");
+                string Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString());
 
                 return Ok(User);
             }
@@ -52,7 +52,7 @@ namespace Learn_Managment_System_Backend.Controllers
         }
 
 
-        private async Task<ActionResult<UserDTO>> UserAuthenticationAsync(LoginDTO request)
+        private async Task<UserDTO> UserAuthenticationAsync(LoginDTO request)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Learn_Managment_System_Backend.Controllers
                 // Si el usuario no existe, retorna Unauthorized
                 if (UserExist == null)
                 {
-                    return Unauthorized(new { error = "Usuario o contraseña incorrectos" });
+                    throw new Exception("Usuario o contraseña incorrectos");
                 }
 
                 // Verifica si la contraseña es válida
@@ -70,7 +70,7 @@ namespace Learn_Managment_System_Backend.Controllers
 
                 if (IsValidPassword == false)
                 {
-                    return Unauthorized(new { error = "Usuario o contraseña incorrectos" });
+                    throw new Exception("Usuario o contraseña incorrectos");
                 }
 
                 // Genera el token
@@ -80,21 +80,21 @@ namespace Learn_Managment_System_Backend.Controllers
                 UserDTO UserDataReturned = new UserDTO
                 {
                     User = UserExist.User,
-                    Email = UserExist.Email,
-                    Token = Token, // El token generado se asigna aquí
-                    Registration_Date = UserExist.Registration_Date,
                     Name = UserExist.Name,
-                    LastName = UserExist.LastName
+                    LastName = UserExist.LastName,
+                    Email = UserExist.Email,
+                    Registration_Date = UserExist.Registration_Date,
+                    Token = Token, // El token generado se asigna aquí
                 };
 
                 // Devuelve la respuesta con el DTO
-                return Ok(UserDataReturned);
+                return UserDataReturned;
             }
             catch (System.Exception error)
-             {
-        Console.WriteLine(error);
-        return StatusCode(500, new { error = "Error interno del servidor" });
-    }
+            {
+                Console.WriteLine(error);
+                throw new Exception("Error interno del servidor");
+            }
         }
 
     }

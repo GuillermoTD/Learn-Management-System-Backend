@@ -7,7 +7,7 @@ namespace Learn_Managment_System_Backend.Services
 {
   public interface IUserService
   {
-    Task<UserDTO> CheckIfUserExists(LoginDTO credentials);
+    Task<UserModel> CheckIfUserExists(LoginDTO credentials);
     Task<bool> CheckIfUserExists(SignupDTO credentials);
 
     string GenerateToken(string username, string email);

@@ -68,7 +68,6 @@ namespace Learn_Managment_System_Backend.Services
 
         }
 
-<<<<<<< HEAD
         public string GenerateToken(string username, string userId)
         {
             try
@@ -115,9 +114,6 @@ namespace Learn_Managment_System_Backend.Services
 
         }
 
-
-
-
         public async Task<UserModel> CreateUser(UserModel NewUser)
         {
             try
@@ -141,12 +137,5 @@ namespace Learn_Managment_System_Backend.Services
                 throw new Exception($"Error creando el usuario: {ex.Message}", ex);
             }
         }
-
-
-=======
-        public string GenerateJwtToken(){
-            
-        }
->>>>>>> 57e3b28eac6c17fbe99a873d100a512097709ee4
     }
 }
