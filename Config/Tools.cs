@@ -22,6 +22,17 @@ namespace Learn_Managment_System_Backend.Config
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
         }
 
+          public static bool DecryptPassword(string PlainPassword, string HashedPassword)
+        {
+            //Se crea instancia manual de tal forma de que en cuanto la misma termina su validacion de encriptación para no afectar el rendimiento.
+            using var sha256 = SHA256.Create();
+            //Se crea un arreglo de bytes a partir del string de la contraseña
+            byte[] hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(PlainPassword));
+            //Dichos bytes son convertidos a string 
+            string hashedInput = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            return hashedInput == HashedPassword;
+        }
+
         public static string HashPassword(string password)
         {
             // Generate a 128-bit salt using a sequence of

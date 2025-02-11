@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-
-
 namespace Learn_Managment_System_Backend.Controllers
 {
     [ApiController]
@@ -33,6 +31,10 @@ namespace Learn_Managment_System_Backend.Controllers
         {
             try
             {
+                
+                if(!ModelState.IsValid){
+                    return BadRequest(ModelState);
+                }
                 var UserExist = await _UserService.CheckIfUserExists(request);
 
                 if (UserExist)
@@ -40,12 +42,7 @@ namespace Learn_Managment_System_Backend.Controllers
                    return BadRequest(new { error = "El usuario existe"});
                 }
 
-                // bool IsValidPassword = Tools.CheckIfPasswordIsValid(request.Password, request.Password);
-
-                // if (IsValidPassword == false)
-                // {
-                //     throw new Exception("Invalid password");
-                // }
+            
                 UserModel NewUser = new UserModel
                 {
                     Id = ObjectId.GenerateNewId().ToString(), // Generar un nuevo Id de MongoDB

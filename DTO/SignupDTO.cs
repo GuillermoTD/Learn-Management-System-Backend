@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.Serialization;
+
 
 namespace Learn_Managment_System_Backend.DTO
 {
     public class SignupDTO
     {
+
         [Required(ErrorMessage = "El nombre es obligatorio.")]
         public required string Name { get; set; }
 
@@ -22,8 +25,9 @@ namespace Learn_Managment_System_Backend.DTO
         [MinLength(6, ErrorMessage = "La contraseña debe tener al menos 6 caracteres.")]
         public required string Password { get; set; }
 
-        [Phone(ErrorMessage = "El número de teléfono no es válido.")]
 
+        [Required]
+        [Phone(ErrorMessage = "El número de teléfono no es válido.")]
         public required string PhoneNumber { get; set; }
 
 
