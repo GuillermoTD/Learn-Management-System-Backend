@@ -5,29 +5,21 @@ using Learn_Managment_System_Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using ZstdSharp;
-
 
 namespace Learn_Managment_System_Backend.Controllers
 {
+    [Route("[controller]")]
     [ApiController]
-    [Route("/[controller]")]
     public class LoginController : Controller
     {
-        //Se declara una variable con el servicio de userservice
         private readonly IUserService _UserService;
+        // private readonly IConfiguration _Configuration;
 
-        //Se declara una variable con la interfaz de configuracion para acceder al appsettings
-        private readonly IConfiguration _Configuration;
-
-
-        //Constructor
         public LoginController(IUserService userService, IConfiguration configuration)
         {
             this._UserService = userService;
-            this._Configuration = configuration;
+            // this._Configuration = configuration;
         }
-
 
         [HttpPost]
         [AllowAnonymous]
@@ -36,66 +28,67 @@ namespace Learn_Managment_System_Backend.Controllers
             try
             {
                 Console.WriteLine("Se valida que existe el usuario");
-                var User = await UserAuthenticationAsync(request);
+                var UserExist = await UserAuthenticationAsync(request);
+
+                if (UserExist == null)
+                {
+                    return Unauthorized(new { message = "Usuario o contraseña incorrectos" });
+                }
 
                 Console.WriteLine("Se genera el token");
-                string Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString());
-
-                return Ok(User);
+                return Ok(UserExist);
             }
-            catch (System.Exception error)
+            catch (Exception error)
             {
-                Console.WriteLine("Usuario y/o Contraseña incorrecta", error.Message);
-                return NotFound();
+                return BadRequest(new { message = error.Message });
             }
-
         }
 
+        [HttpOptions]
+        public IActionResult Preflight()
+        {
+            Response.Headers.Append("Access-Control-Allow-Origin", "http://localhost:4200");
+            Response.Headers.Append("Access-Control-Allow-Methods", "POST, OPTIONS");
+            Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            Response.Headers.Append("Access-Control-Allow-Credentials", "true");
+            return Ok();
+        }
 
-        private async Task<UserDTO> UserAuthenticationAsync(LoginDTO request)
+        private async Task<UserDTO?> UserAuthenticationAsync(LoginDTO request)
         {
             try
             {
-                // Verifica si el usuario existe
                 UserModel UserExist = await _UserService.CheckIfUserExists(request);
 
-                // Si el usuario no existe, retorna Unauthorized
                 if (UserExist == null)
                 {
-                    throw new Exception("Usuario o contraseña incorrectos");
+                    return null;
                 }
 
-                // Verifica si la contraseña es válida
                 bool IsValidPassword = Tools.CheckIfPasswordIsValid(request.Password, UserExist.Password);
 
-                if (IsValidPassword == false)
+                if (!IsValidPassword)
                 {
-                    throw new Exception("Usuario o contraseña incorrectos");
+                    return null;
                 }
 
-                // Genera el token
                 string Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString());
 
-                // Crea el DTO con la información del usuario
-                UserDTO UserDataReturned = new UserDTO
+                return new UserDTO
                 {
                     User = UserExist.User,
                     Name = UserExist.Name,
                     LastName = UserExist.LastName,
                     Email = UserExist.Email,
                     Registration_Date = UserExist.Registration_Date,
-                    Token = Token, // El token generado se asigna aquí
+                    Token = Token,
                 };
-
-                // Devuelve la respuesta con el DTO
-                return UserDataReturned;
             }
-            catch (System.Exception error)
+            catch (Exception error)
             {
                 Console.WriteLine(error);
-                throw new Exception("Error interno del servidor");
+                return null;
             }
         }
-
     }
 }
