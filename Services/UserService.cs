@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ZstdSharp.Unsafe;
 using Microsoft.AspNetCore.Http.HttpResults;
+using System.Security.Cryptography;
 
 
 namespace Learn_Managment_System_Backend.Services
@@ -136,6 +137,30 @@ namespace Learn_Managment_System_Backend.Services
             {
                 throw new Exception($"Error creando el usuario: {ex.Message}", ex);
             }
+        }
+
+        public string GenerateRefreshToken()
+        {
+            var randomBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+                return Convert.ToBase64String(randomBytes);
+            }
+        }
+
+        async public Task<UserModel> GetUserByRefreshToken(string refreshToken)
+        {
+            var Filtered_User_By_RefreshToken = Builders<UserModel>.Filter.Eq(u => u.RefreshToken, refreshToken);
+
+            return await Collection.FindAsync(Filtered_User_By_RefreshToken).Result.FirstAsync();
+        }
+
+        async public Task<bool> UpdateUser(UserModel User)
+        {
+            var filter = Builders<UserModel>.Filter.Eq(u => u.Id, User.Id);
+
+            return await Collection.UpdateOneAsync(filter,User);
         }
     }
 }

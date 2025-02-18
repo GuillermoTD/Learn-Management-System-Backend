@@ -42,7 +42,6 @@ namespace Learn_Managment_System_Backend.Controllers
                    return BadRequest(new { error = "El usuario existe"});
                 }
 
-            
                 UserModel NewUser = new UserModel
                 {
                     Id = ObjectId.GenerateNewId().ToString(), // Generar un nuevo Id de MongoDB
@@ -54,7 +53,9 @@ namespace Learn_Managment_System_Backend.Controllers
                     Registration_Date = DateTime.UtcNow,
                     Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString()),
                     User = request.UserName,
-                    Password = Tools.HashPassword(request.Password)
+                    Password = Tools.HashPassword(request.Password),
+                    RefreshToken = _UserService.GenerateRefreshToken(),
+                    RefreshTokenExpiry = DateTime.UtcNow.AddDays(7)
                 };
 
                 var UserCreated = await _UserService.CreateUser(NewUser);
@@ -65,7 +66,9 @@ namespace Learn_Managment_System_Backend.Controllers
                     Token = UserCreated.Token,
                     Registration_Date = UserCreated.Registration_Date,
                     Name = UserCreated.Name,
-                    LastName = UserCreated.LastName
+                    LastName = UserCreated.LastName,
+                    RefreshToken = UserCreated.RefreshToken,
+                    RefreshTokenExpiry = UserCreated.RefreshTokenExpiry
                 };
 
                 return Ok(UserDataReturned);

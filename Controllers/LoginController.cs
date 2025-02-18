@@ -73,6 +73,7 @@ namespace Learn_Managment_System_Backend.Controllers
                 }
 
                 string Token = _UserService.GenerateToken(request.UserName, ObjectId.GenerateNewId().ToString());
+                string refreshToken = _UserService.GenerateRefreshToken();
 
                 return new UserDTO
                 {
@@ -82,6 +83,8 @@ namespace Learn_Managment_System_Backend.Controllers
                     Email = UserExist.Email,
                     Registration_Date = UserExist.Registration_Date,
                     Token = Token,
+                    RefreshToken = refreshToken,
+                    RefreshTokenExpiry = DateTime.UtcNow.AddDays(7)
                 };
             }
             catch (Exception error)

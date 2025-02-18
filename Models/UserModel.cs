@@ -37,6 +37,8 @@ namespace Learn_Managment_System_Backend.Models
 
         public string Password { get; set; }
 
-       
+        public string RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiry { get; set; }
+
     }
 }

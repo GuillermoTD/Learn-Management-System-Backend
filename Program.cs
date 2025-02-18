@@ -13,8 +13,10 @@ builder.Services.AddControllers();
 
 builder.Services.AddSingleton<DbConnection>();
 
+//Agremos nuestros servicios
 builder.Services.AddScoped<IUserService, UserService>();
 
+//Declaramos el nombre para las configuraciones de CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 builder.Services.AddCors(options=>{
@@ -62,7 +64,6 @@ if (app.Environment.IsDevelopment())
 
 //Permite el uso de autenticacion en los controladores
 // app.UseAuthorization();
-
 
 
 var dbConnection = app.Services.GetRequiredService<DbConnection>();
