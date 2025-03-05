@@ -12,7 +12,6 @@ using Microsoft.IdentityModel.Tokens;
 namespace Learn_Managment_System_Backend.Controllers
 {
     [ApiController]
-    [Route("/[controller]")]
     public class RefreshTokenController : Controller
     {
 
@@ -23,11 +22,11 @@ namespace Learn_Managment_System_Backend.Controllers
         }
 
 
-        [HttpPost("refresh")]
+        [HttpPost("refresh-token")]
         public async Task<ActionResult>RefreshToken(){
 
             //Validamos si el refreshtoken es valido.
-            if(!Request.Cookies.TryGetValue("refreshToken",out var refreshToken)){
+            if(!Request.Cookies.TryGetValue("refresh-token",out var refreshToken)){
                 return Unauthorized(new {message = "no se encontró token autorizado"});
             }
 
@@ -47,7 +46,9 @@ namespace Learn_Managment_System_Backend.Controllers
             User.Token = NewToken;
             User.RefreshToken = NewRefreshToken;
             User.RefreshTokenExpiry = DateTime.UtcNow.AddDays(7);
-            await _UserService.UpdateUser();
+            
+            //actualizamos estos valores en el documento del usuario
+            await _UserService.UpdateUser(User);
 
             return Ok();
         }

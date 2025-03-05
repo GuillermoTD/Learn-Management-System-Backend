@@ -1,15 +1,11 @@
 using Learn_Managment_System_Backend.Config;
-using MongoDB.Driver;
 using Learn_Managment_System_Backend.Models;
 using Learn_Managment_System_Backend.DTO;
+using MongoDB.Driver;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using ZstdSharp.Unsafe;
-using Microsoft.AspNetCore.Http.HttpResults;
 using System.Security.Cryptography;
 
 
@@ -92,6 +88,7 @@ namespace Learn_Managment_System_Backend.Services
                 /*Se crean los claims que se insertaran en el token para su posterior generacion*/
                 var claims = new[]{
                 new Claim(ClaimTypes.Name, username), //Nombre del usuario
+                new Claim(ClaimTypes.NameIdentifier, userId), //
                 new Claim("id", userId), //ID del usuario
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()) //Identificador unico del token para evitar que se repita el token en diferentes usuarios
             };
@@ -101,7 +98,7 @@ namespace Learn_Managment_System_Backend.Services
                     issuer: issuer!.ToString(),
                     audience: audience!.ToString(),
                     claims: claims,
-                    expires: DateTime.UtcNow.AddHours(1),
+                    expires: DateTime.UtcNow.AddMinutes(15), //la vigencia del token de acceso sera de 15 minutos
                     signingCredentials: credentials
                 );
                 //Se genera el token
@@ -158,9 +155,20 @@ namespace Learn_Managment_System_Backend.Services
 
         async public Task<bool> UpdateUser(UserModel User)
         {
+            //Filtramos al usuario en la base de datos
             var filter = Builders<UserModel>.Filter.Eq(u => u.Id, User.Id);
 
-            return await Collection.UpdateOneAsync(filter,User);
+            var update = Builders<UserModel>.Update
+                .Set(u => u.Token, User.Token)
+                .Set(u => u.RefreshToken, User.RefreshToken);
+
+            var userUpdated = await Collection.UpdateOneAsync(filter, update);
+            return userUpdated.ModifiedCount > 0;
+        }
+
+        public Task<UserModel> GenerateRefreshToken(string refreshToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

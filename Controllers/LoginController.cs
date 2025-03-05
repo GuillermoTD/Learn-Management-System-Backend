@@ -49,7 +49,7 @@ namespace Learn_Managment_System_Backend.Controllers
         {
             Response.Headers.Append("Access-Control-Allow-Origin", "http://localhost:4200");
             Response.Headers.Append("Access-Control-Allow-Methods", "POST, OPTIONS");
-            Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization");
+            Response.Headers.Append("Access-Control-Allow-Headers", "Content-Type, Authorization,Access-Control-Allow-Origin");
             Response.Headers.Append("Access-Control-Allow-Credentials", "true");
             return Ok();
         }
