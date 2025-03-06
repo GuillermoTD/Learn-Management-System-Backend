@@ -15,6 +15,7 @@ builder.Services.AddSingleton<DbConnection>();
 
 //Agremos nuestros servicios
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 //Declaramos el nombre para las configuraciones de CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -81,8 +82,8 @@ dbConnection.PingDatabase();
 
 app.UseCors(MyAllowSpecificOrigins);
 
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseAuthentication(); // Habilita la autenticación JWT
+app.UseAuthorization();  // Habilita la autorización
 
 //Mapeamos todos los controladores que tengamos disponibles
 app.MapControllers();

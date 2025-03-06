@@ -25,6 +25,9 @@ namespace Learn_Managment_System_Backend.Models
         [BsonElement("course_front_image")]
         public string CourseFrontImage { get; set; } = string.Empty;
 
+        [BsonElement("language")]
+        public string Language { get; set; } = string.Empty;
+
         [BsonElement("price")]
         public decimal Precio { get; set; } = 0;
 
@@ -36,6 +39,10 @@ namespace Learn_Managment_System_Backend.Models
 
         [BsonElement("ratings")]
         public List<Ratings> Valoraciones { get; set; } = new();
+
+        [BsonElement("creation_date")]
+        [BsonRepresentation(BsonType.DateTime)]
+        public DateTime Creation_Date { get; set; }
     }
 
     public class Lessons

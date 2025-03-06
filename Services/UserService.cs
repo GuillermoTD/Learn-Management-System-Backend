@@ -106,7 +106,6 @@ namespace Learn_Managment_System_Backend.Services
             }
             catch (System.Exception error)
             {
-
                 throw new($"Error al generar token \n{error.Message}");
             }
 
