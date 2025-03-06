@@ -12,7 +12,7 @@ namespace Learn_Managment_System_Backend.Controllers
     {
         private readonly ICourseService _courseService;
 
-        //controlador
+        //Constructor
         public CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
@@ -51,6 +51,29 @@ namespace Learn_Managment_System_Backend.Controllers
 
 
         }
+        
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> SearchCourseByName(){}
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> GetCourseById(){}
+        
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EnrollmentCourse(){}
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> PaymentCourse(){}
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> PaymentCourse(){}
+
+
+
 
     }
 }
