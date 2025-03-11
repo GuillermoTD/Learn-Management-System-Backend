@@ -51,5 +51,14 @@ namespace Learn_Managment_System_Backend.Services
 
             return query;
         }
+
+        public async Task<CourseModel?> SearchCoursesByTitle(string title)
+        {
+            var filter = Builders<CourseModel>.Filter.Eq(c => c.Title, title);
+
+            var query = await Collection.Find(filter).FirstOrDefaultAsync();
+
+            return query;
+        }
     }
 }
