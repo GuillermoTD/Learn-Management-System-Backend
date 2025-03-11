@@ -28,16 +28,28 @@ namespace Learn_Managment_System_Backend.Services
         {
             /*Aqui se utiliza el objeto BsonDocument el cual es el que se encarga de hacer operaciones en los documentos de las colleciones.*/
             var courses = await Collection.Find(new BsonDocument()).ToListAsync();
-
             return courses;
         }
 
-
-        public async Task<List<CourseModel>>GetCourseById(string courseId, string userId)
+        public async Task<CourseModel> GetCourseById(string courseId)
         {
-            throw new NotImplementedException();
-        }
+            /*Validamos que el formato del id es correcto, tomando el string de courseId
+            creamos un nuevo objeto de tipo ObjectId con el cual creamos una estructura como esta "id:ObjectId(id)"*/
+            if (!ObjectId.TryParse(courseId, out var objectId))
+            {
+                Console.WriteLine($"Formato de ID inválido: {courseId}");
+                return null;
+            }
 
-    
+            var filter = Builders<CourseModel>.Filter.Eq("_id", objectId);
+
+            Console.WriteLine(filter);
+
+            var query = await Collection.Find(filter).FirstOrDefaultAsync();
+
+            Console.WriteLine("hola" + query + "parece que no esta");
+
+            return query;
+        }
     }
 }

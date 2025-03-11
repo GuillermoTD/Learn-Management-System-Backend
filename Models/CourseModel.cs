@@ -7,7 +7,7 @@ namespace Learn_Managment_System_Backend.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = string.Empty;
+        public string Id { get; set; }
 
         [BsonElement("title")]
         public string Titulo { get; set; } = string.Empty;

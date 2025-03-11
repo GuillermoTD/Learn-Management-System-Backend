@@ -22,7 +22,7 @@ namespace Learn_Managment_System_Backend.Controllers
         [Authorize]
         public async Task<IActionResult> GetCourses()
         {
-           
+
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
@@ -51,26 +51,57 @@ namespace Learn_Managment_System_Backend.Controllers
 
 
         }
-        
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> SearchCourseByName(){}
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> GetCourseById(){}
-        
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> EnrollmentCourse(){}
+        // [HttpGet]
+        // [Authorize]
+        // public async Task<IActionResult> SearchCourseByName(){
+        // }
 
-        [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PaymentCourse(){}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCourseById(string id)
+        {
+            Console.WriteLine(id);
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
+                
 
-        [HttpGet]
-        [Authorize]
-        public async Task<IActionResult> PaymentCourse(){}
+                if (string.IsNullOrEmpty(userId)) //Si es un string vacio implica que el usuario no existe
+                {
+                    Console.WriteLine("el usuario no ta logueao");
+                    return Unauthorized("No se pudo obtener el ID del usuario.");
+                }
+
+                var course = await _courseService.GetCourseById(id); //obtenemos los cursos del servicio de cursos
+
+                if (course == null) // Verificamos si el curso existe
+                {
+
+                    return NotFound(new { message = "No existe el curso buscado." });
+                }
+
+                return Ok(course);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "No existe el curso buscado", error = ex.Message });
+            }
+
+        }
+
+        // [HttpPost]
+        // [Authorize]
+        // public async Task<IActionResult> EnrollmentCourse(){}
+
+        // [HttpPost]
+        // [Authorize]
+        // public async Task<IActionResult> PaymentCourse(){}
+
+        // [HttpGet]
+        // [Authorize]
+        // public async Task<IActionResult> PaymentCourse(){}
 
 
 
