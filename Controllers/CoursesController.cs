@@ -2,6 +2,7 @@ using System.Security.Claims;
 using Learn_Managment_System_Backend.DTO;
 using Learn_Managment_System_Backend.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Learn_Managment_System_Backend.Controllers
@@ -12,10 +13,13 @@ namespace Learn_Managment_System_Backend.Controllers
     {
         private readonly ICourseService _courseService;
 
+
         //Constructor
         public CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
+
+
         }
 
         [HttpGet]
@@ -49,13 +53,46 @@ namespace Learn_Managment_System_Backend.Controllers
                 return StatusCode(500, new { message = "Error en el servidor", error = ex.Message });
             }
 
-
         }
 
-        // [HttpGet]
-        // [Authorize]
-        // public async Task<IActionResult> SearchCourseByName(){
-        // }
+
+        [HttpGet("search/{courseTitle}")]
+        [Authorize]
+        public async Task<IActionResult> SearchByTitle(string courseTitle)
+        {
+
+            try
+            {
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
+
+                //Decodificamos el parametro enviado de parte del front con caracteres especiales
+                var decodedTitle = Uri.UnescapeDataString(courseTitle);
+
+                Console.WriteLine(decodedTitle);
+                
+                var courses = await _courseService.SearchCoursesByTitle(decodedTitle); //obtenemos los cursos del servicio de cursos
+
+                if (string.IsNullOrEmpty(userId)) //Si es un string vacio implica que el usuario no existe
+                {
+                    Console.WriteLine("el usuario no ta logueao");
+                    return Unauthorized("No se pudo obtener el ID del usuario.");
+                }
+
+                if (courses == null)
+                {
+                    Console.WriteLine("No se encontraron cursos.");
+                    return NotFound("No se encontraron cursos.");
+                }
+
+                return Ok(courses);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Curso no encontrado", error = ex.Message });
+            }
+
+
+        }
 
         [Authorize]
         [HttpGet("{id}")]
@@ -64,8 +101,8 @@ namespace Learn_Managment_System_Backend.Controllers
             Console.WriteLine(id);
             try
             {
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
-                
+                //Obtener el id del usaurio desde token JWT
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
                 if (string.IsNullOrEmpty(userId)) //Si es un string vacio implica que el usuario no existe
                 {

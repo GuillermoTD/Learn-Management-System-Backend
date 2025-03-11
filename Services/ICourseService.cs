@@ -6,7 +6,8 @@ namespace Learn_Managment_System_Backend.Services
     public interface ICourseService
     {
         public Task<List<CourseModel>> GetAllCourses();
-        public Task<CourseModel?> GetCourseById(string courseId);
+        public Task<CourseModel> GetCourseById(string courseId);
+        public Task<CourseModel?> SearchCoursesByTitle(string courseName);
     }
 
 }
