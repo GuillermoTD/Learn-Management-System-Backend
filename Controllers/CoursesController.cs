@@ -1,5 +1,8 @@
+using System.Net;
 using System.Security.Claims;
+using System.Web;
 using Learn_Managment_System_Backend.DTO;
+using Learn_Managment_System_Backend.Models;
 using Learn_Managment_System_Backend.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,25 +16,26 @@ namespace Learn_Managment_System_Backend.Controllers
     {
         private readonly ICourseService _courseService;
 
-
         //Constructor
         public CoursesController(ICourseService courseService)
         {
             _courseService = courseService;
-
-
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> GetCourses()
+        public async Task<IActionResult> GetCourses([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
 
+            if (pageNumber < 1 || pageSize < 1)
+            {
+                return BadRequest("Los numeros de pagina y su tama�o deben ser mayores a 0");
+            }
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
 
-                var courses = await _courseService.GetAllCourses(); //obtenemos los cursos del servicio de cursos
+                var courses = await _courseService.GetAllCourses(pageNumber, pageSize); //obtenemos los cursos del servicio de cursos
 
                 if (string.IsNullOrEmpty(userId)) //Si es un string vacio implica que el usuario no existe
                 {
@@ -55,22 +59,27 @@ namespace Learn_Managment_System_Backend.Controllers
 
         }
 
-
         [HttpGet("search/{courseTitle}")]
         [Authorize]
-        public async Task<IActionResult> SearchByTitle(string courseTitle)
+        public async Task<ActionResult<List<CourseModel>>> SearchByTitle(string courseTitle, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
+
+            if (pageNumber < 1 || pageSize < 1)
+            {
+                return BadRequest("Los numeros de pagina y su tama�o deben ser mayores a 0");
+            }
 
             try
             {
                 var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; //Obtener el id del usaurio desde token JWT
 
                 //Decodificamos el parametro enviado de parte del front con caracteres especiales
-                var decodedTitle = Uri.UnescapeDataString(courseTitle);
+                var decodedTitle = WebUtility.UrlDecode(courseTitle);
 
                 Console.WriteLine(decodedTitle);
-                
-                var courses = await _courseService.SearchCoursesByTitle(decodedTitle); //obtenemos los cursos del servicio de cursos
+
+                var Courses = await _courseService.SearchCoursesByTitle(decodedTitle, pageSize, pageNumber); //obtenemos los cursos del servicio de cursos
+
 
                 if (string.IsNullOrEmpty(userId)) //Si es un string vacio implica que el usuario no existe
                 {
@@ -78,17 +87,21 @@ namespace Learn_Managment_System_Backend.Controllers
                     return Unauthorized("No se pudo obtener el ID del usuario.");
                 }
 
-                if (courses == null)
+                if (Courses == null)
                 {
                     Console.WriteLine("No se encontraron cursos.");
                     return NotFound("No se encontraron cursos.");
                 }
-
-                return Ok(courses);
+             
+                return Ok(Courses);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { message = "Curso no encontrado", error = ex.Message });
+                return StatusCode(500, new
+                {
+                    message = "Curso no encontrado",
+                    error = ex.Message
+                });
             }
 
 
@@ -134,14 +147,6 @@ namespace Learn_Managment_System_Backend.Controllers
 
         // [HttpPost]
         // [Authorize]
-        // public async Task<IActionResult> PaymentCourse(){}
-
-        // [HttpGet]
-        // [Authorize]
-        // public async Task<IActionResult> PaymentCourse(){}
-
-
-
-
+        // public async Task<IActionResult> CreateReview(){}
     }
 }
