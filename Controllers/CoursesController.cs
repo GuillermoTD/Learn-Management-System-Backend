@@ -66,7 +66,7 @@ namespace Learn_Managment_System_Backend.Controllers
 
             if (pageNumber < 1 || pageSize < 1)
             {
-                return BadRequest("Los numeros de pagina y su tama�o deben ser mayores a 0");
+                return BadRequest("Los numeros de pagina y su tamaño deben ser mayores a 0");
             }
 
             try
@@ -103,7 +103,6 @@ namespace Learn_Managment_System_Backend.Controllers
                     error = ex.Message
                 });
             }
-
 
         }
 
