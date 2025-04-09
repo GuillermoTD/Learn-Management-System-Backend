@@ -12,7 +12,7 @@ namespace Learn_Managment_System_Backend.Config
         private readonly IMongoDatabase _database;
 
         //contructor
-        public DbConnection(IConfiguration configuration )
+        public DbConnection(IConfiguration configuration)
         {
             try
             {
@@ -33,9 +33,6 @@ namespace Learn_Managment_System_Backend.Config
             }
         }
 
-        public DbConnection()
-        {
-        }
 
         public void PingDatabase()
         {
@@ -52,7 +49,7 @@ namespace Learn_Managment_System_Backend.Config
             {
 
                 // Si ocurre una excepción, la conexión ha fallado
-                Console.WriteLine($"**Error al conectar a la base de datos** :  {error.Message}");
+                Console.WriteLine($"*******Error al conectar a la base de datos******* :  {error.Message}");
             }
         }
 
@@ -60,7 +57,15 @@ namespace Learn_Managment_System_Backend.Config
         con las colecciones de una base de datos pasandole un modelo*/
         public IMongoCollection<T> GetCollection<T>(string collectionName)
         {
-            return _database.GetCollection<T>(collectionName);
+            try
+            {
+                return _database.GetCollection<T>(collectionName);
+
+            }
+            catch (Exception error){
+                Console.WriteLine($"**Error al conectar a la base de datos** :  {error.Message}");
+                return null;
+            }
         }
     }
 }

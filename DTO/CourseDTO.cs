@@ -14,6 +14,8 @@ namespace Learn_Managment_System_Backend.DTO
         public int EnrolledStudents { get; set; }
         public DateTime CreationDate { get; set; }
         public List<Rating> Ratings { get; set; }
+        public List<string> LearningGoals { get; set; }
+        public List<ItemVideo> CourseVideos { get; set; }
 
         public class Lesson
         {
@@ -28,5 +30,13 @@ namespace Learn_Managment_System_Backend.DTO
             public string Comment { get; set; }
             public int Rate { get; set; }
         }
+
+        public class ItemVideo {
+            public string description { get; set; }
+            public string video { get; set; }
+        
+        }
+
+
     }
 }

@@ -43,6 +43,12 @@ namespace Learn_Managment_System_Backend.Models
         [BsonElement("creation_date")]
         [BsonRepresentation(BsonType.DateTime)]
         public DateTime Creation_Date { get; set; }
+
+        [BsonElement("learningGoals")]
+        public List<string> learningGoals { get; set; }
+
+        [BsonElement("course_videos")]
+        public List<ItemVideo> course_videos { get; set; }
     }
 
     public class Lessons
@@ -69,4 +75,14 @@ namespace Learn_Managment_System_Backend.Models
         [BsonElement("rate")]
         public int Rate { get; set; } = 0; // 1 - 5 estrellas
     }
+
+    public class ItemVideo
+    {
+        [BsonElement("descripcion")]
+        public string Descripcion { get; set; } = string.Empty;
+
+        [BsonElement("video")]
+        public string Video { get; set; } = string.Empty;
+    }
+
 }
