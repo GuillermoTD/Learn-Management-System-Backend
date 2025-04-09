@@ -23,11 +23,10 @@ namespace Learn_Managment_System_Backend.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetCourses([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
 
-            if (pageNumber < 1 || pageSize < 1)
+            if (pageNumber < 1 || pageSize < 10)
             {
                 return BadRequest("Los numeros de pagina y su tama�o deben ser mayores a 0");
             }
@@ -54,11 +53,14 @@ namespace Learn_Managment_System_Backend.Controllers
             }
             catch (System.Exception ex)
             {
-                return StatusCode(500, new { message = "Error en el servidor", error = ex.Message });
+                Console.WriteLine("Esto funciona");
+                Console.WriteLine($"Error: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+                return StatusCode(500, new { message = "Error en el servidorr", error = ex.Message });
             }
 
         }
-
+       
         [HttpGet("search/{courseTitle}")]
         [Authorize]
         public async Task<ActionResult<List<CourseModel>>> SearchByTitle(string courseTitle, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)

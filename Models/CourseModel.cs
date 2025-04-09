@@ -45,11 +45,9 @@ namespace Learn_Managment_System_Backend.Models
         public DateTime Creation_Date { get; set; }
 
         [BsonElement("learningGoals")]
-        [BsonRepresentation(BsonType.DateTime)]
-        public List<CourseGoals> learningGoals { get; set; }
+        public List<string> learningGoals { get; set; }
 
         [BsonElement("course_videos")]
-        [BsonRepresentation(BsonType.DateTime)]
         public List<ItemVideo> course_videos { get; set; }
     }
 
@@ -84,11 +82,7 @@ namespace Learn_Managment_System_Backend.Models
         public string Descripcion { get; set; } = string.Empty;
 
         [BsonElement("video")]
-        public int Video { get; set; } = 0;
+        public string Video { get; set; } = string.Empty;
     }
 
-    public class CourseGoals
-    {
-        public string goal { get; set; }
-    }
 }

@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:models\\coursemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\dto\\coursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:dto\\coursedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\services\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:services\\courseservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\config\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:config\\dbconnection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5D193024-98FF-DDAF-5719-E85E6FC6BA46}|Learn-Managment-System Backend.csproj|c:\\users\\estevan\\onedrive - solvex dominicana\\documentos\\learn-managment-system backend\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,39 +46,65 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CourseService.cs",
+              "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Services\\CourseService.cs",
+              "RelativeDocumentMoniker": "Services\\CourseService.cs",
+              "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Services\\CourseService.cs",
+              "RelativeToolTip": "Services\\CourseService.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T13:38:13.965Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-09T13:34:51.359Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DbConnection.cs",
+              "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Config\\DbConnection.cs",
+              "RelativeDocumentMoniker": "Config\\DbConnection.cs",
+              "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Config\\DbConnection.cs",
+              "RelativeToolTip": "Config\\DbConnection.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAxwAgAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-07T20:35:28.591Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CourseModel.cs",
               "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Models\\CourseModel.cs",
               "RelativeDocumentMoniker": "Models\\CourseModel.cs",
               "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Models\\CourseModel.cs",
               "RelativeToolTip": "Models\\CourseModel.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAA0wCAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAAUwC8AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T20:02:13.527Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CourseDTO.cs",
-              "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\DTO\\CourseDTO.cs",
-              "RelativeDocumentMoniker": "DTO\\CourseDTO.cs",
-              "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\DTO\\CourseDTO.cs",
-              "RelativeToolTip": "DTO\\CourseDTO.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAA5wCkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-04T19:40:15.055Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "LoginController.cs",
               "DocumentMoniker": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Controllers\\LoginController.cs",
               "RelativeDocumentMoniker": "Controllers\\LoginController.cs",
               "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Controllers\\LoginController.cs",
               "RelativeToolTip": "Controllers\\LoginController.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACUAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-04T17:35:51.775Z"
             },
@@ -82,7 +116,7 @@
               "RelativeDocumentMoniker": "Controllers\\CoursesController.cs",
               "ToolTip": "C:\\Users\\ESTEVAN\\OneDrive - Solvex Dominicana\\Documentos\\Learn-Managment-System Backend\\Controllers\\CoursesController.cs",
               "RelativeToolTip": "Controllers\\CoursesController.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAgwEYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAADwvyQAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-01T12:41:10.436Z",
               "EditorCaption": ""
